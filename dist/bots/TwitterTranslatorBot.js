@@ -1,28 +1,28 @@
-import TwitterController from '../controllers/TwitterController'
-import translator from '../services/GoogleTranslator'
-import { TweetObject } from '../services/Twitter'
-import Status from '../models/Status'
-import User from '../models/User'
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _TwitterController = require('../controllers/TwitterController'); var _TwitterController2 = _interopRequireDefault(_TwitterController);
+var _GoogleTranslator = require('../services/GoogleTranslator'); var _GoogleTranslator2 = _interopRequireDefault(_GoogleTranslator);
 
-export interface TwitterTranslatorBotConfigs {
-  user_id: string,
-  user_screen_name: string,
-  status_count: number,
-  translate_to: string,
-  include_rts: boolean,
-  watch: boolean,
-  interval: number
-}
+var _Status = require('../models/Status'); var _Status2 = _interopRequireDefault(_Status);
+var _User = require('../models/User'); var _User2 = _interopRequireDefault(_User);
+
+
+
+
+
+
+
+
+
+
 
 class TwitterTranslatorBot {
-  private lastReplyedTweetId: string
-  private configs: TwitterTranslatorBotConfigs
+  
+  
 
-  public constructor (configs: TwitterTranslatorBotConfigs) {
+   constructor (configs) {
     this.configs = configs
   }
 
-  public init (): void {
+   init () {
     if (this.configs.watch) {
       console.log(`Searching Tweets every ${this.configs.interval / 1000} seconds.`)
       this.fetchTranslateAndReply()
@@ -34,14 +34,14 @@ class TwitterTranslatorBot {
     }
   }
 
-  private fetchTranslateAndReply (): void {
+   fetchTranslateAndReply () {
     console.log('Getting Started...')
 
     const { user_id, user_screen_name, status_count, include_rts } = this.configs
 
     console.log('Looking for status...')
-    TwitterController.getUserTimeline(user_id, user_screen_name, status_count, include_rts)
-      .then(async (statuses: Array<TweetObject>) => {
+    _TwitterController2.default.getUserTimeline(user_id, user_screen_name, status_count, include_rts)
+      .then(async (statuses) => {
         if (statuses.length === 0) {
           console.log("Couldn't find any status.")
 
@@ -61,13 +61,13 @@ class TwitterTranslatorBot {
         try {
           console.log('Translating...')
 
-          const translations = await translator(status.full_text, this.configs.translate_to)
+          const translations = await _GoogleTranslator2.default.call(void 0, status.full_text, this.configs.translate_to)
 
           const translatedText = translations.data[0]
 
-          const user = new User(status.user.id, status.user.name, status.user.screen_name)
+          const user = new (0, _User2.default)(status.user.id, status.user.name, status.user.screen_name)
 
-          return new Status(
+          return new (0, _Status2.default)(
             status.created_at,
             status.id_str,
             translatedText,
@@ -77,16 +77,16 @@ class TwitterTranslatorBot {
           console.log(error)
         }
       })
-      .then((translated_status: null | Status) => {
+      .then((translated_status) => {
         if (translated_status === null) return
 
         const replyText = `@${translated_status.user.screen_name}\n${translated_status.full_text}`
         console.log('Generating reply...')
-        TwitterController.replyToStatus(translated_status.id_str, replyText)
-          .then((reply: TweetObject) => {
-            const user = new User(reply.user.id, reply.user.name, reply.user.screen_name)
+        _TwitterController2.default.replyToStatus(translated_status.id_str, replyText)
+          .then((reply) => {
+            const user = new (0, _User2.default)(reply.user.id, reply.user.name, reply.user.screen_name)
 
-            const generatedReply = new Status(
+            const generatedReply = new (0, _Status2.default)(
               reply.created_at,
               reply.id_str,
               reply.full_text,
@@ -109,4 +109,4 @@ class TwitterTranslatorBot {
   }
 }
 
-export default TwitterTranslatorBot
+exports. default = TwitterTranslatorBot
