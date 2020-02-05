@@ -1,3 +1,3 @@
-const a = 1
+import dotenv from 'dotenv'
 
-console.log(a)
+dotenv.config()
