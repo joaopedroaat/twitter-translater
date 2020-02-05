@@ -6,11 +6,11 @@ function startupConfigs () {
 
   const configs = {
     user_screen_name,
-    user_id: _readlinesync2.default.question(`What is the ${user_screen_name} ID (Optional) ? `, { defaultInput: '' }), // Carlsen id: 30352096
+    user_id: _readlinesync2.default.question(`What is the @${user_screen_name} ID (Optional) ? `, { defaultInput: '' }), // Carlsen id: 30352096
     status_count: 1,
     translate_to: _readlinesync2.default.question('Translate to: ', { defaultInput: 'en' }),
     include_rts: _readlinesync2.default.keyInYNStrict(`Include @${user_screen_name} retweets? `),
-    watch: _readlinesync2.default.keyInYNStrict(`Watch for new ${user_screen_name} tweets and automatically reply? `),
+    watch: _readlinesync2.default.keyInYNStrict(`Watch for new @${user_screen_name} tweets and automatically reply? `),
     interval: 0
   }
 

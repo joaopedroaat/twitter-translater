@@ -6,11 +6,11 @@ function startupConfigs (): TwitterTranslatorBotConfigs {
 
   const configs: TwitterTranslatorBotConfigs = {
     user_screen_name,
-    user_id: readline.question(`What is the ${user_screen_name} ID (Optional) ? `, { defaultInput: '' }), // Carlsen id: 30352096
+    user_id: readline.question(`What is the @${user_screen_name} ID (Optional) ? `, { defaultInput: '' }), // Carlsen id: 30352096
     status_count: 1,
     translate_to: readline.question('Translate to: ', { defaultInput: 'en' }),
     include_rts: readline.keyInYNStrict(`Include @${user_screen_name} retweets? `),
-    watch: readline.keyInYNStrict(`Watch for new ${user_screen_name} tweets and automatically reply? `),
+    watch: readline.keyInYNStrict(`Watch for new @${user_screen_name} tweets and automatically reply? `),
     interval: 0
   }
 
