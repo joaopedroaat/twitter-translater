@@ -68,7 +68,7 @@ class TwitterTranslatorBot {
           const user = new User(status.user.id, status.user.name, status.user.screen_name)
 
           return new Status(
-            status.created_at,
+            new Date(status.created_at),
             status.id_str,
             translatedText,
             user
@@ -87,7 +87,7 @@ class TwitterTranslatorBot {
             const user = new User(reply.user.id, reply.user.name, reply.user.screen_name)
 
             const generatedReply = new Status(
-              reply.created_at,
+              new Date(reply.created_at),
               reply.id_str,
               reply.full_text,
               user

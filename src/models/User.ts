@@ -1,6 +1,4 @@
-import { TwitterUser } from '../services/Twitter'
-
-class User implements TwitterUser {
+class User {
   public id: number
   public name: string
   public screen_name: string

@@ -20,13 +20,6 @@ class TwitterController {
       tweet_mode: 'extended'
     })
   }
-
-  static generateURL (status) {
-    const user_id = status.user.id
-    const status_id = status.id
-
-    return `https://twitter.com/${user_id}/status/${status_id}`
-  }
 }
 
 exports. default = TwitterController

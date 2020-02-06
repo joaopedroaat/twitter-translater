@@ -1,4 +1,4 @@
-import twitter, { TweetObject } from '../services/Twitter'
+import twitter from '../services/Twitter'
 import Twitter = require('twitter')
 
 class TwitterController {
@@ -19,13 +19,6 @@ class TwitterController {
       in_reply_to_status_id: id,
       tweet_mode: 'extended'
     })
-  }
-
-  static generateURL (status: TweetObject): string {
-    const user_id = status.user.id
-    const status_id = status.id
-
-    return `https://twitter.com/${user_id}/status/${status_id}`
   }
 }
 

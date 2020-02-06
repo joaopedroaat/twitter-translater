@@ -1,7 +1,7 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-
-class Status  {
+class Status {
+  
   
   
   
@@ -12,6 +12,11 @@ class Status  {
     this.id_str = id_str
     this.full_text = full_text
     this.user = created_by
+    this.generateURL()
+  }
+
+   generateURL () {
+    this.url = `https://twitter.com/${this.user.id}/status/${this.id_str}`
   }
 }
 
